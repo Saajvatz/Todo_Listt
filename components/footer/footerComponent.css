@@ -1,0 +1,31 @@
+.footer {
+  text-align: center;
+  padding: 20px;
+  background-color: #f8f8f8;
+  margin-top: auto; /* Asegura que el footer quede al fondo */
+  border-top: 2px solid #ccc; /* Línea divisoria superior */
+}
+
+.footer-line {
+  width: 100%;
+  border: none;
+  border-top: 1px solid #999; /* Línea fina decorativa */
+  margin: 0 auto 10px auto;
+}
+
+.footer-text {
+  font-family: Arial, sans-serif;
+  font-size: 16px; /* Tamaño más grande */
+  color: #333;
+}
+
+.footer-text a {
+  font-size: 18px; /* GitHub más grande */
+  color: #007acc;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.footer-text a:hover {
+  text-decoration: underline;
+}
