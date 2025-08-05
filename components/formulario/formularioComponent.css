@@ -1,0 +1,41 @@
+.formulario-tarea {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 400px;
+  margin: 2rem auto;
+  padding: 2rem;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  font-family: sans-serif;
+}
+
+.formulario-tarea input[type="text"],
+.formulario-tarea input[type="date"],
+.formulario-tarea textarea,
+.formulario-tarea select {
+  padding: 0.8rem;
+  font-size: 1rem;
+  border: 1px solid #aaa;
+  border-radius: 4px;
+}
+
+.formulario-tarea textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.formulario-tarea button {
+  padding: 0.9rem;
+  font-size: 1rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.formulario-tarea button:hover {
+  background-color: #0056b3;
+}

@@ -1,3 +1,88 @@
-.informacion{
-    border: 1px solid red;
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap');
+
+* {
+    font-family: 'Quicksand', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.div-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+.contenedor-botones {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-tarea, .btn-archivados {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-tarea {
+    background-color: #62b4f9;
+    color: white;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.btn-archivados {
+    background-color: #e3e3e3;
+    color: #333;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.tarjeta-informacion {
+    background-color: #f9f9f9;
+    border-radius: 20px;
+    padding: 20px;
+    width: 320px;
+    box-shadow: 2px 2px 10px rgba(0,0,0,0.05);
+    position: relative;
+}
+
+.estado {
+    background-color: #b3f2c4;
+    color: #1a6e30;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    position: absolute;
+    right: 15px;
+    top: 15px;
+}
+
+.titulo-tarea {
+    font-size: 16px;
+    margin-bottom: 10px;
+    color: #222;
+    font-weight: 600;
+}
+
+.descripcion-tarea {
+    font-size: 13px;
+    margin-bottom: 15px;
+    color: #555;
+    line-height: 1.4;
+}
+
+.contenedor-integrantes {
+    display: flex;
+    gap: 12px;
+    margin-top: 5px;
+}
+
+.emoji-integrante {
+    font-size: 22px;
 }
