@@ -1,21 +1,28 @@
 export function footer() {
-  let footer = document.createElement('footer');
-  footer.className = 'footer';
+    // Crear footer
+    let footer = document.createElement('footer');
 
-  let linea = document.createElement('hr');
-  linea.className = 'footer-line';
-  footer.appendChild(linea);
+    // Línea separadora
+    let hr = document.createElement('hr');
+    footer.appendChild(hr);
 
-  let texto = document.createElement('p');
-  texto.className = 'footer-text';
+    // Contenedor principal
+    let divContenido = document.createElement('div');
+    divContenido.className = "footer-contenido";
 
-  let enlace = document.createElement('a');
-  enlace.href = 'https://github.com/Saajvatz/todo_list';
-  enlace.textContent = 'GitHub';
-  enlace.target = '_blank';
+    // Texto vacío a la izquierda (para centrar mejor)
+    let spanVacio = document.createElement('span');
+    divContenido.appendChild(spanVacio);
 
-  texto.appendChild(enlace);
-  footer.appendChild(texto);
+    // Enlace de GitHub
+    let enlace = document.createElement('a');
+    enlace.className = "footer-github";
+    enlace.href = "https://github.com/ROCKEMMA/todo-list"; // Aquí agregas tu URL manualmente
+    enlace.innerText = "@github";
+    enlace.target = "_blank"; // Abrir en otra pestaña
+    divContenido.appendChild(enlace);
 
-  return footer;
+    footer.appendChild(divContenido);
+
+    return footer;
 }

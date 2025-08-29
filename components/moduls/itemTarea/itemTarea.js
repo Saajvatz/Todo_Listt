@@ -1,74 +1,65 @@
+
 export function tarea(
-  indice = 0,
-  titulo = "Sin título",
-  descripcion = "Sin descripción",
-  estado = "Pendiente",
-  fechaAsignacion = "Sin fecha",
-  fechaEntrega = "Sin fecha",
+  indice,
+  titulo,
+  estado,
+  fechaAs,
+  fechaEn,
   listaIntegrantes = []
 ) {
-  const divItem = document.createElement('div');
-  divItem.className = "item-tarea";
+  // Contenedor principal
+  const div = document.createElement("div");
+  div.className = "tarea";
 
   // Número de tarea
-  const divNumero = document.createElement('div');
-  divNumero.className = "tarea-numero";
-  divNumero.textContent = `#${indice}`;
+  const divNumero = document.createElement("div");
+  divNumero.className = "div-numero";
+  divNumero.textContent = indice;
+  div.appendChild(divNumero);
 
   // Título
-  const divTitulo = document.createElement('div');
-  divTitulo.className = "tarea-titulo";
-  divTitulo.textContent = titulo;
-
-  // Descripción
-  const divDescripcion = document.createElement('div');
-  divDescripcion.className = "tarea-descripcion";
-  divDescripcion.textContent = descripcion;
+  const tituloTarea = document.createElement("h3");
+  tituloTarea.className = "tarea-titulo";
+  tituloTarea.textContent = titulo;
+  div.appendChild(tituloTarea);
 
   // Estado
-  const spanEstado = document.createElement('span');
-  const estadoClase = estado.toLowerCase().replace(/\s+/g, '-'); // ejemplo: "En progreso" → "en-progreso"
-  spanEstado.className = `tarea-estado tarea-estado-${estadoClase}`;
-  spanEstado.textContent = estado;
+  const divEstado = document.createElement("div");
+  divEstado.className = `tarea-estado ${estado
+    .toLowerCase()
+    .replace(" ", "-")}`;
+  divEstado.textContent = estado;
+  div.appendChild(divEstado);
 
-  // Fecha de asignación
-  const fechaAsig = document.createElement('div');
-  fechaAsig.className = "tarea-fecha-asignacion";
-  fechaAsig.textContent = `Asignada: ${fechaAsignacion}`;
+  // Fecha asignación
+  const fechaAsignacion = document.createElement("span");
+  fechaAsignacion.className = "tarea-fecha";
+  fechaAsignacion.textContent = fechaAs;
+  div.appendChild(fechaAsignacion);
 
-  // Fecha de entrega
-  const fechaEnt = document.createElement('div');
-  fechaEnt.className = "tarea-fecha-entrega";
-  fechaEnt.textContent = `Entrega: ${fechaEntrega}`;
+  // Fecha entrega
+  const fechaEntrega = document.createElement("span");
+  fechaEntrega.className = "tarea-fecha";
+  fechaEntrega.textContent = fechaEn;
+  div.appendChild(fechaEntrega);
 
   // Integrantes
-  const divIntegrantes = document.createElement('div');
+  const divIntegrantes = document.createElement("div");
   divIntegrantes.className = "tarea-integrantes";
+  listaIntegrantes.forEach((integrante) => {
+    const icono = document.createElement("div");
+    icono.className = "integrante-icono";
+    icono.textContent = integrante; // si tienes imágenes aquí puedes cambiarlo
+    divIntegrantes.appendChild(icono);
+  });
+  div.appendChild(divIntegrantes);
 
-  if (Array.isArray(listaIntegrantes)) {
-    listaIntegrantes.forEach((emoji) => {
-      const spanEmoji = document.createElement('span');
-      spanEmoji.className = "tarea-integrante";
-      spanEmoji.textContent = emoji;
-      divIntegrantes.appendChild(spanEmoji);
-    });
-  }
-
-  // Botón de eliminar
-  const btnEliminar = document.createElement('button');
+  // Botón eliminar
+  const btnEliminar = document.createElement("button");
   btnEliminar.className = "tarea-eliminar";
-  btnEliminar.textContent = "🗑️";
-  // Aquí puedes añadir el evento click para eliminar si lo deseas
+  btnEliminar.setAttribute("aria-label", "Eliminar tarea");
+  btnEliminar.textContent = "❌";
+  div.appendChild(btnEliminar);
 
-  // Ensamblar el componente
-  divItem.appendChild(divNumero);
-  divItem.appendChild(divTitulo);
-  divItem.appendChild(divDescripcion);
-  divItem.appendChild(spanEstado);
-  divItem.appendChild(fechaAsig);
-  divItem.appendChild(fechaEnt);
-  divItem.appendChild(divIntegrantes);
-  divItem.appendChild(btnEliminar);
-
-  return divItem;
+  return div;
 }

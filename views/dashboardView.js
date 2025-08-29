@@ -1,25 +1,33 @@
-import { footer } from "../components/footer/footerComponent.js";
 import { header } from "../components/header/headerComponent.js";
+import { footer } from "../components/footer/footerComponent.js";
 import { tareas } from "../components/tareas/tareasComponent.js";
 import { informacion } from "../components/informacion/informacion.js";
 
-export function dashboard() {
+export async function dashboard() {
+    try {
+        // contenedor principal
+        let contenedor = document.createElement('div');
+        contenedor.className = "dashboard";
 
+        // header
+        contenedor.appendChild(header());
 
-  let dashboard = document.createElement('section');
-  dashboard.className = "dashboard";
+        // Sección1
+        let seccion1 = document.createElement('section');
+        seccion1.className = "seccion-1";
+        seccion1.appendChild(tareas(tareasDb));
+        seccion1.appendChild(informacion(tareasDb[0]));
+        contenedor.appendChild(seccion1);
 
-  dashboard.appendChild(header());
+        // footer
+        contenedor.appendChild(footer());
 
-  let seccion1 = document.createElement('section');
-  seccion1.className = "seccion-1";
-  seccion1.appendChild(tareas());
-  seccion1.appendChild(informacion());
-  dashboard.appendChild(seccion1);
-
-  dashboard.appendChild(footer());
-
-  return dashboard;
+        return contenedor;
+    } catch (error) {
+        console.error("error:", error);
+    }
 }
 
-document.body.appendChild(dashboard());
+dashboard().then(elemento => {
+    document.body.appendChild(elemento);
+});

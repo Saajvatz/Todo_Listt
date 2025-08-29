@@ -1,134 +1,66 @@
-import { formulario } from "../formulario/formularioComponent.js";
-import { tarea } from "../moduls/itemTarea/itemTarea.js";
+export function informacion(tarea) {
+  const div = document.createElement("div");
+  div.className = "contenedor-informacion";
 
-export function informacion(datos = {}) {
-  const {
-    estado = "Sin estado",
-    titulo = "Sin título",
-    descripcion = "Sin descripción",
-    integrantes = []
-  } = datos;
+  // Botones
+  const divBotones = document.createElement("div");
+  divBotones.className = "div-botones";
 
-  let divInformacion = document.createElement('div');
-  divInformacion.className = "div-info";
-
-  // --- Botones ---
-  let contenedorBotones = document.createElement('div');
-  contenedorBotones.className = "contenedor-botones";
-
-  let btnTarea = document.createElement('button');
+  const btnTarea = document.createElement("button");
   btnTarea.className = "btn-tarea";
-  btnTarea.textContent = "+ tarea";
+  btnTarea.innerText = "+ Tarea";
 
-  let btnArchivados = document.createElement('button');
+  const btnArchivados = document.createElement("button");
   btnArchivados.className = "btn-archivados";
-  btnArchivados.textContent = "Archivados";
+  btnArchivados.innerText = "Archivados";
 
-  contenedorBotones.appendChild(btnTarea);
-  contenedorBotones.appendChild(btnArchivados);
+  divBotones.append(btnTarea, btnArchivados);
 
-  // --- Tarjeta de información ---
-  let tarjeta = document.createElement('div');
-  tarjeta.className = "tarjeta-informacion";
+  // Información de la tarea
+  const divInformacion = document.createElement("div");
+  divInformacion.className = "div-informacion";
 
-  let spanEstado = document.createElement('span');
-  spanEstado.className = "estado";
-  spanEstado.textContent = estado;
+  // Estado
+  const divEstado = document.createElement("div");
+  divEstado.className = `estado-tarea ${tarea.estado_tarea
+    .toLowerCase()
+    .replace(" ", "-")}`;
+  divEstado.innerText = tarea.estado_tarea;
 
-  let h3Titulo = document.createElement('h3');
-  h3Titulo.className = "titulo-tarea";
-  h3Titulo.textContent = titulo;
+  // Título
+  const titulo = document.createElement("h3");
+  titulo.className = "titulo-asignacion";
+  titulo.innerText = tarea.nombre;
 
-  let pDescripcion = document.createElement('p');
-  pDescripcion.className = "descripcion-tarea";
-  pDescripcion.textContent = descripcion;
+  // Descripción
+  const descripcion = document.createElement("p");
+  descripcion.className = "descripcion-asignacion";
+  descripcion.innerText = tarea.descripcion;
 
-  let textoIntegrantes = document.createElement('p');
-  textoIntegrantes.textContent = "Integrantes";
+  // Texto integrantes
+  const spanIntegrantes = document.createElement("span");
+  spanIntegrantes.className = "texto-integrantes";
+  spanIntegrantes.innerText = "Integrantes";
 
-  let contenedorIntegrantes = document.createElement('div');
-  contenedorIntegrantes.className = "contenedor-integrantes";
+  // Contenedor integrantes
+  const divIntegrantes = document.createElement("div");
+  divIntegrantes.className = "div-integrantes";
 
-  if (Array.isArray(integrantes)) {
-    integrantes.forEach(integrante => {
-      let spanEmoji = document.createElement('span');
-      spanEmoji.className = "emoji-integrante";
-      spanEmoji.textContent = integrante;
-      contenedorIntegrantes.appendChild(spanEmoji);
-    });
-  }
+/*   tarea.integrantes.forEach((icono) => {
+    const divIcono = document.createElement("div");
+    divIcono.className = "integrante";
+    divIcono.innerText = icono;
+    divIntegrantes.appendChild(divIcono);
+  }); */
 
-  // Contenedor para el formulario y para las tareas archivadas
-  let contenedorFormulario = document.createElement('div');
-  contenedorFormulario.className = "contenedor-formulario";
+  divInformacion.append(
+    divEstado,
+    titulo,
+    descripcion,
+    spanIntegrantes
+  );
 
-  let contenedorArchivados = document.createElement('div');
-  contenedorArchivados.className = "contenedor-archivados";
+  div.append(divBotones, divInformacion);
 
-  // Función para cargar tareas archivadas (ejemplo: estado == "Completado")
-  function cargarArchivadas() {
-    contenedorArchivados.innerHTML = ""; // limpiar
-
-    let tareas = JSON.parse(localStorage.getItem("tareas")) || [];
-    let archivadas = tareas.filter(t => t.estado.toLowerCase() === "completado");
-
-    if (archivadas.length === 0) {
-      contenedorArchivados.textContent = "No hay tareas archivadas.";
-      return;
-    }
-
-    archivadas.forEach((tareaData, index) => {
-      let tareaElemento = tarea(
-        index + 1,
-        tareaData.titulo,
-        tareaData.descripcion,
-        tareaData.estado,
-        tareaData.fechaAsignacion,
-        tareaData.fechaEntrega,
-        tareaData.listaIntegrantes || []
-      );
-      contenedorArchivados.appendChild(tareaElemento);
-    });
-  }
-
-  // Toggle formulario al hacer clic en + tarea
-  btnTarea.addEventListener('click', () => {
-    // Limpiar archivados si están visibles
-    contenedorArchivados.innerHTML = "";
-
-    if (contenedorFormulario.children.length > 0) {
-      contenedorFormulario.innerHTML = "";
-    } else {
-      const form = formulario();
-
-      // Cada vez que se guarda una tarea, actualizar lista si quieres (aquí solo console.log)
-      form.addEventListener("submit", () => {
-        console.log("Nueva tarea guardada");
-        // Aquí podrías emitir evento o llamar función para refrescar lista tareas
-      });
-
-      contenedorFormulario.appendChild(form);
-    }
-  });
-
-  // Mostrar tareas archivadas al hacer clic
-  btnArchivados.addEventListener('click', () => {
-    contenedorFormulario.innerHTML = ""; // ocultar formulario
-    cargarArchivadas();
-  });
-
-  // Ensamblar tarjeta
-  tarjeta.appendChild(spanEstado);
-  tarjeta.appendChild(h3Titulo);
-  tarjeta.appendChild(pDescripcion);
-  tarjeta.appendChild(textoIntegrantes);
-  tarjeta.appendChild(contenedorIntegrantes);
-
-  // Ensamblar componente principal
-  divInformacion.appendChild(contenedorBotones);
-  divInformacion.appendChild(tarjeta);
-  divInformacion.appendChild(contenedorFormulario);
-  divInformacion.appendChild(contenedorArchivados);
-
-  return divInformacion;
+  return div;
 }

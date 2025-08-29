@@ -1,12 +1,28 @@
-.dashboard{
+.dashboard {
     height: 100vh;
-    padding: 1rem;
 
     display: grid;
     grid-template-rows: auto 1fr auto;
+    gap: 2rem;
+    align-items: start;
 }
 
-.seccion-1{
+.seccion-1 {
+    padding-top: 3rem;
+    height: 100%;
     display: grid;
-    grid-template-columns: 75% 25%;
+    grid-template-columns: 70% 30%;
+}
+
+@media (max-width: 700px) {
+    .seccion-1 {
+        grid-template-columns: auto;
+    }   
+}
+
+@media (min-width: 1300px) {
+    .seccion-1 {
+        max-width: 130rem;
+        margin: auto;
+    }
 }

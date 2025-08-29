@@ -1,16 +1,21 @@
 import { tarea } from "../moduls/itemTarea/itemTarea.js";
-const tareasDb = [
-  { titulo: "Hola" },
-  { titulo: "Hola 2" },
-  { titulo: "Hola 3" }
-];
 
-export function tareas(){
+export function tareas(tareasDb) {
+    console.log(tareasDb);
     let div = document.createElement('div');
-    div.className = "tareas";
+    div.className = "div-tareas";
 
-    tareasDb.forEach(({ titulo }) => {
-        div.appendChild(tarea(titulo));
+    tareasDb.forEach((e) => {
+        div.appendChild(
+            tarea(
+                1,
+                e.nombre,
+                e.estado_tarea,
+                e.fecha_asignada,
+                e.fecha_entrega,
+                []
+            )
+        );
     });
 
     return div;

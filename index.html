@@ -1,41 +1,164 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Todo List</title>
-
-  <link rel="stylesheet" href="./index.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>todo-list</title>
   <style>
-    /* Estilos para ocupar toda la pantalla */
-    html, body {
+    * {
       margin: 0;
       padding: 0;
-      height: 100%;
-      width: 100%;
-      font-family: Arial, sans-serif;
-      background-color: #f0f4f8;
+      box-sizing: border-box;
     }
 
-    /* Contenedor centrado */
-    .centrado {
+    body {
+      height: 100%;
+      width: 100%;
+      font-family: 'Segoe UI', sans-serif;
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100%;
-      text-align: center;
+      background: linear-gradient(135deg, rgb(53, 5, 5), red);
+      color: #333;
     }
 
-    /* Texto grande */
+    .wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2.5rem;
+      text-align: center;
+      width: 100%;
+      max-width: 550px;
+      background: #fff;
+      border-radius: 20px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .wrapper img {
+      max-width: 180px;
+      margin-bottom: 1.5rem;
+    }
+
     h1 {
-      font-size: 6rem;
-      color: #333;
+      font-size: 2.8rem;
+      color: red;
+      margin-bottom: 0.8rem;
+      text-shadow: 1px 1px 0 #eaeaea;
+    }
+
+    p {
+      font-size: 1.1rem;
+      margin-bottom: 0.6rem;
+      color: #555;
+    }
+
+    .email-box {
+      margin-top: 1.5rem;
+      display: flex;
+      width: 100%;
+      max-width: 380px;
+      background: #f0f0f0;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    input[type="email"] {
+      flex: 1;
+      padding: 0.9rem;
+      border: none;
+      outline: none;
+      font-size: 1rem;
+      background: transparent;
+    }
+
+    button {
+      padding: 0.9rem 1.3rem;
+      background: red;
+      color: white;
+      border: none;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    button:hover {
+      background: #155ab5;
+      transform: scale(1.05);
+    }
+
+    .message {
+      margin-top: 1.3rem;
+      font-weight: bold;
+      font-size: 1rem;
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 2rem;
+      }
+
+      .wrapper {
+        padding: 1.5rem;
+      }
+
+      .email-box {
+        flex-direction: column;
+        border-radius: 12px;
+      }
+
+      button {
+        border-radius: 0 0 12px 12px;
+        width: 100%;
+      }
     }
   </style>
 </head>
+
 <body>
-  <div class="centrado">
-    <h1>Todo List</h1>
+  <div class="wrapper">
+    <img src="assets/programando.gif" alt="Programador trabajando" />
+    <h1>Todo-List</h1>
+    <p>🚀 ¡Estamos creando algo increíble para ti!</p>
+    <p>Déjanos tu correo y serás de los primeros en enterarte:</p>
+
+    <div class="email-box">
+      <input type="email" id="email" placeholder="Tu correo electrónico">
+      <button onclick="notificar()">Notificarme</button>
+    </div>
+
+    <div class="message" id="mensaje"></div>
   </div>
+
+  <script>
+    function notificar() {
+      const email = document.getElementById("email").value.trim();
+      const mensaje = document.getElementById("mensaje");
+
+      if (email === "") {
+        mensaje.textContent = "⚠️ Por favor, ingresa un correo válido.";
+        mensaje.style.color = "red";
+      } else {
+        mensaje.textContent = "✅ ¡Gracias! Te notificaremos pronto.";
+        mensaje.style.color = "green";
+        document.getElementById("email").value = "";
+      }
+    }
+  </script>
 </body>
+
 </html>
